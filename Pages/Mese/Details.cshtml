@@ -1,0 +1,31 @@
+﻿@page
+@model GestiuneRestaurant.Pages.Mese.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Masa</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Masa.NumarMasa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Masa.NumarMasa)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Masa.Capacitate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Masa.Capacitate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Masa.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

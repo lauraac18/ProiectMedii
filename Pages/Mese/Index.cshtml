@@ -1,0 +1,42 @@
+﻿@page
+@model GestiuneRestaurant.Pages.Mese.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Mese</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Masa[0].NumarMasa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Masa[0].Capacitate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Masa) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumarMasa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacitate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

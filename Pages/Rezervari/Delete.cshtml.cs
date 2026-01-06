@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using GestiuneRestaurant.Data;
-using ProiectRestaurant.Models;
+using GestiuneRestaurant.Models;
 
 namespace GestiuneRestaurant.Pages.Rezervari
 {

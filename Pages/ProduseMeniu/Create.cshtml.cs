@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GestiuneRestaurant.Data;
+using GestiuneRestaurant.Models;
+using GestiuneRestaurant.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using GestiuneRestaurant.Data;
-using ProiectRestaurant.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GestiuneRestaurant.Pages.ProduseMeniu
 {
-    public class CreateModel : PageModel
+    public class CreateModel : RestaurantPageModel
     {
         private readonly GestiuneRestaurant.Data.GestiuneRestaurantContext _context;
 

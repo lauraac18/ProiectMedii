@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using GestiuneRestaurant.Data;
-using ProiectRestaurant.Models;
+using GestiuneRestaurant.Models;
 
 namespace GestiuneRestaurant.Pages.Rezervari
 {
@@ -21,8 +21,12 @@ namespace GestiuneRestaurant.Pages.Rezervari
 
         public IActionResult OnGet()
         {
-        ViewData["ClientID"] = new SelectList(_context.Set<Client>(), "ID", "ID");
-        ViewData["MasaID"] = new SelectList(_context.Set<Masa>(), "ID", "ID");
+           
+
+            ViewData["ClientID"] = new SelectList(_context.Set<Client>(), "ID", "NumeComplet");
+
+            ViewData["MasaID"] = new SelectList(_context.Set<Masa>(), "ID", "NumarMasa");
+
             return Page();
         }
 
@@ -37,8 +41,22 @@ namespace GestiuneRestaurant.Pages.Rezervari
                 return Page();
             }
 
+           
             _context.Rezervare.Add(Rezervare);
             await _context.SaveChangesAsync();
+
+        
+            var masaRezervata = await _context.Masa.FindAsync(Rezervare.MasaID);
+
+            if (masaRezervata != null)
+            {
+               
+                masaRezervata.Stare = StareMasa.Rezervata;
+
+               
+                _context.Masa.Update(masaRezervata);
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToPage("./Index");
         }

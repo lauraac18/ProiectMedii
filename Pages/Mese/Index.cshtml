@@ -5,13 +5,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Mese</h1>
+<h1 class="display-5 text-primary">Gestionare Mese</h1>
+
+<div class="alert alert-info mt-3 shadow-sm">
+    <i class="bi bi-info-circle-fill"></i> <strong>Notă:</strong> Asigurați-vă că verificați starea meselor înainte de a adăuga una nouă în sistem.
+</div>
 
 <p>
-    <a asp-page="Create">Create New</a>
+   
+    <a asp-page="Create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Adaugă Masă Nouă</a>
 </p>
-<table class="table">
-    <thead>
+
+<table class="table table-hover table-striped align-middle">
+    <thead class="table-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Masa[0].NumarMasa)
@@ -19,24 +25,45 @@
             <th>
                 @Html.DisplayNameFor(model => model.Masa[0].Capacitate)
             </th>
-            <th></th>
+            <th>
+               
+                Stare
+            </th>
+            <th class="text-end">Acțiuni</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Masa) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumarMasa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacitate)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Masa)
+        {
+            <tr>
+                <td>
+                    <span class="fw-bold">Masa @Html.DisplayFor(modelItem => item.NumarMasa)</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacitate) persoane
+                </td>
+                <td>
+                    
+                    @if (item.Stare == GestiuneRestaurant.Models.StareMasa.Libera)
+                    {
+                        <span class="badge rounded-pill bg-success">Liberă</span>
+                    }
+                    else if (item.Stare == GestiuneRestaurant.Models.StareMasa.Ocupata)
+                    {
+                        <span class="badge rounded-pill bg-danger">Ocupată</span>
+                    }
+                    else
+                    {
+                        <span class="badge rounded-pill bg-warning text-dark">Rezervată</span>
+                    }
+                </td>
+                <td class="text-end">
+                    
+                    <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-info text-dark">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

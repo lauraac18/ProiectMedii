@@ -1,4 +1,4 @@
-﻿namespace ProiectRestaurant.Models
+﻿namespace GestiuneRestaurant.Models
 {
     public class ProdusDestinat
     {

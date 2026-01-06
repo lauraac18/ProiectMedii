@@ -1,43 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProiectRestaurant.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using GestiuneRestaurant.Models;
+using GestiuneRestaurant.Data;
+using System.Threading.Tasks;
 
-public class CreateModel : ProdusePageModel 
+namespace GestiuneRestaurant.Pages.ProduseDestinate
 {
-    private readonly GestiuneRestaurant.Data.GestiuneRestaurantContext _context;
-    public CreateModel(GestiuneRestaurant.Data.GestiuneRestaurantContext context) { _context = context; }
-
-    public IActionResult OnGet()
+    public class CreateModel : PageModel
     {
-        var produs = new ProdusMeniu();
-        produs.ProduseDestinate = new List<ProdusDestinat>();
-        PopulateAssignedCategoryData(_context, produs);
-        return Page();
-    }
+        private readonly GestiuneRestaurantContext _context;
 
-    [BindProperty]
-    public ProdusMeniu ProdusMeniu { get; set; } = default!;
-
-    public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
-    {
-        var noulProdus = new ProdusMeniu();
-        if (selectedCategories != null)
+        public CreateModel(GestiuneRestaurantContext context)
         {
-            noulProdus.ProduseDestinate = new List<ProdusDestinat>();
-            foreach (var cat in selectedCategories)
-            {
-                noulProdus.ProduseDestinate.Add(new ProdusDestinat { CategorieProdusID = int.Parse(cat) });
-            }
+            _context = context;
         }
 
-        if (await TryUpdateModelAsync<ProdusMeniu>(noulProdus, "ProdusMeniu",
-            i => i.NumePreparat, i => i.Pret, i => i.Descriere))
+       
+        [BindProperty]
+        public ProdusDestinat ProdusDestinat { get; set; } = default!;
+
+        public IActionResult OnGet()
         {
-            _context.ProdusMeniu.Add(noulProdus);
+            // Verifică dacă în tabelele tale coloanele de afișat sunt NumePreparat și NumeCategorie
+            ViewData["ProdusMeniuID"] = new SelectList(_context.ProdusMeniu, "ID", "NumePreparat");
+            ViewData["CategorieProdusID"] = new SelectList(_context.CategorieProdus, "ID", "NumeCategorie");
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            _context.ProdusDestinat.Add(ProdusDestinat);
             await _context.SaveChangesAsync();
+
             return RedirectToPage("./Index");
         }
-
-        PopulateAssignedCategoryData(_context, noulProdus);
-        return Page();
     }
 }

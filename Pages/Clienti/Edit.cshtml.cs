@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestiuneRestaurant.Data;
-using ProiectRestaurant.Models;
+using GestiuneRestaurant.Models;
 
 namespace GestiuneRestaurant.Pages.Clienti
 {

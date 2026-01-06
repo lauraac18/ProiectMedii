@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using GestiuneRestaurant.Data;
-using ProiectRestaurant.Models;
+using GestiuneRestaurant.Models;
 
 namespace GestiuneRestaurant.Pages.Rezervari
 {
@@ -23,9 +23,11 @@ namespace GestiuneRestaurant.Pages.Rezervari
 
         public async Task OnGetAsync()
         {
+            
             Rezervare = await _context.Rezervare
                 .Include(r => r.Client)
-                .Include(r => r.Masa).ToListAsync();
+                .Include(r => r.Masa)
+                .ToListAsync();
         }
     }
 }

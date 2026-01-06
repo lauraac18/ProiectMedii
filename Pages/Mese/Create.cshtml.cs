@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using GestiuneRestaurant.Data;
-using ProiectRestaurant.Models;
+using GestiuneRestaurant.Models;
 
 namespace GestiuneRestaurant.Pages.Mese
 {

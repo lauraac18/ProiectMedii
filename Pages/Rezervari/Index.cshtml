@@ -26,23 +26,24 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Rezervare) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataOra)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Masa.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.ID)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
+@foreach (var item in Model.Rezervare)
+{
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataOra)
+                </td>
+                <td>
+                    @* Afișăm numărul mesei din tabelul legat *@
+                    Masa @Html.DisplayFor(modelItem => item.Masa.NumarMasa)
+                </td>
+                <td>
+                    @* Afișăm numele complet al clientului din tabelul legat *@
+                    @Html.DisplayFor(modelItem => item.Client.NumeComplet)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
 }
-    </tbody>
-</table>

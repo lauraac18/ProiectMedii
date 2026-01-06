@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ProiectRestaurant.Models;
+using GestiuneRestaurant.Models;
 
 namespace GestiuneRestaurant.Data
 {
@@ -14,11 +14,11 @@ namespace GestiuneRestaurant.Data
         {
         }
 
-        public DbSet<ProiectRestaurant.Models.Rezervare> Rezervare { get; set; } = default!;
-        public DbSet<ProiectRestaurant.Models.ProdusMeniu> ProdusMeniu { get; set; } = default!;
-        public DbSet<ProiectRestaurant.Models.ProdusDestinat> ProdusDestinat { get; set; } = default!;
-        public DbSet<ProiectRestaurant.Models.Masa> Masa { get; set; } = default!;
-        public DbSet<ProiectRestaurant.Models.Client> Client { get; set; } = default!;
-        public DbSet<ProiectRestaurant.Models.CategorieProdus> CategorieProdus { get; set; } = default!;
+        public DbSet<GestiuneRestaurant.Models.Rezervare> Rezervare { get; set; } = default!;
+        public DbSet<GestiuneRestaurant.Models.ProdusMeniu> ProdusMeniu { get; set; } = default!;
+        public DbSet<GestiuneRestaurant.Models.ProdusDestinat> ProdusDestinat { get; set; } = default!;
+        public DbSet<GestiuneRestaurant.Models.Masa> Masa { get; set; } = default!;
+        public DbSet<GestiuneRestaurant.Models.Client> Client { get; set; } = default!;
+        public DbSet<GestiuneRestaurant.Models.CategorieProdus> CategorieProdus { get; set; } = default!;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProiectRestaurant.Models
+namespace GestiuneRestaurant.Models
 {
     public class ProdusMeniu
     {

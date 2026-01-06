@@ -1,7 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProiectRestaurant.Models
+namespace GestiuneRestaurant.Models
 {
+    public enum StareMasa
+    {
+        Libera,
+        Ocupata,
+        Rezervata
+    }
     public class Masa
     {
         public int ID { get; set; }
@@ -13,6 +19,7 @@ namespace ProiectRestaurant.Models
         [Range(1, 20)]
         public int Capacitate { get; set; }
 
+        public StareMasa Stare { get; set; } = StareMasa.Libera;
         public ICollection<Rezervare>? Rezervari { get; set; }
     }
 }

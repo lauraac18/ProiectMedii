@@ -2,48 +2,93 @@
 @model GestiuneRestaurant.Pages.Rezervari.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Gestionare Rezervări";
 }
 
-<h1>Rezervari</h1>
+<h1 class="text-primary display-4">Gestionare Rezervări</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Rezervare[0].DataOra)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rezervare[0].Masa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rezervare[0].Client)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Rezervare)
+@if (TempData["SuccessMessage"] != null)
 {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataOra)
-                </td>
-                <td>
-                    @* Afișăm numărul mesei din tabelul legat *@
-                    Masa @Html.DisplayFor(modelItem => item.Masa.NumarMasa)
-                </td>
-                <td>
-                    @* Afișăm numele complet al clientului din tabelul legat *@
-                    @Html.DisplayFor(modelItem => item.Client.NumeComplet)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-            </tr>
+    <div class="alert alert-success alert-dismissible fade show shadow-sm border-start border-success border-4" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
+
+<div class="alert alert-info mt-3 shadow-sm border-start border-info border-4">
+    <strong>Notă:</strong> Verificați starea meselor înainte de a adăuga o rezervare nouă în sistem.
+</div>
+
+<p class="mt-4">
+    <a asp-page="Create" class="btn btn-success btn-lg shadow">
+        <i class="bi bi-plus-circle me-2"></i>Adaugă Rezervare Nouă
+    </a>
+</p>
+
+<div class="card shadow-sm mt-4 border-0">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0 align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Rezervare[0].DataOra)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Rezervare[0].Masa)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Rezervare[0].Client)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Rezervare[0].NumarPersoane)
+                    </th>
+                    <th class="text-center">Acțiuni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Rezervare)
+                {
+                    <tr>
+                        <td class="fw-bold text-primary">
+                            @Html.DisplayFor(modelItem => item.DataOra)
+                        </td>
+                        <td>
+                            <span class="badge bg-outline-primary border border-primary text-primary px-3 py-2">
+                                Masa @Html.DisplayFor(modelItem => item.Masa.NumarMasa)
+                            </span>
+                        </td>
+                        <td>
+                            <div class="fw-bold">
+                                @Html.DisplayFor(modelItem => item.Client.NumeComplet)
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge rounded-pill bg-light text-dark border">
+                                @Html.DisplayFor(modelItem => item.NumarPersoane) persoane
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group shadow-sm">
+                                <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-warning" title="Editează">Edit</a>
+                                <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-info" title="Detalii">Details</a>
+                                <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-danger" title="Șterge">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .table-hover tbody tr:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+        transition: 0.3s;
+    }
+
+    .badge.bg-outline-primary {
+        background-color: transparent;
+    }
+</style>

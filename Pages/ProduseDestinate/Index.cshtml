@@ -2,41 +2,41 @@
 @model GestiuneRestaurant.Pages.ProduseDestinate.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Log Legături Produse";
 }
 
-<h1>Produse destinate</h1>
+<h1 class="text-primary display-4">Log Legături Categorii</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProdusDestinat[0].ProdusMeniu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProdusDestinat[0].CategorieProdus)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.ProdusDestinat) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProdusMeniu.NumePreparat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategorieProdus.NumeCategorie)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="alert alert-warning mt-3 shadow-sm">
+    <strong>Administrare:</strong> Această pagină afișează mapările brute între preparate și categoriile lor de destinație.
+</div>
+
+<div class="card shadow-sm mt-4 border-warning">
+    <table class="table table-striped mb-0">
+        <thead class="table-dark">
+            <tr>
+                <th>ID Legătură</th>
+                <th>Produs (Meniu)</th>
+                <th>Categorie Alocată</th>
+                <th class="text-center">Gestionare</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ProdusDestinat)
+            {
+                <tr>
+                    <td class="text-muted">#@item.ID</td>
+                    <td class="fw-bold text-secondary">@item.ProdusMeniu.NumePreparat</td>
+                    <td>
+                        <span class="badge bg-light text-primary border border-primary">
+                            @item.CategorieProdus.NumeCategorie
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">Elimină Legătura</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

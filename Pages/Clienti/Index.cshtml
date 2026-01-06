@@ -2,53 +2,45 @@
 @model GestiuneRestaurant.Pages.Clienti.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Gestionare Clienți";
 }
 
-<h1>Clienti</h1>
+<h1 class="text-primary display-4">Gestionare Clienți</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
+<div class="alert alert-info mt-3 shadow-sm">
+    <strong>Notă:</strong> Asigurați-vă că datele de contact ale clienților sunt actualizate pentru rezervări.
+</div>
+
+<p class="mt-4">
+    <a asp-page="Create" class="btn btn-success btn-lg shadow">Adaugă Client Nou</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Client[0].Nume)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Client[0].Prenume)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Client[0].Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Client[0].Telefon)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Client) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prenume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefon)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="card shadow-sm mt-4">
+    <table class="table table-hover mb-0">
+        <thead class="table-dark">
+            <tr>
+                <th>Nume Client</th>
+                <th>Prenume</th>
+                <th>Email</th>
+                <th>Telefon</th>
+                <th class="text-center">Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Client)
+            {
+                <tr>
+                    <td class="align-middle fw-bold">@item.Nume</td>
+                    <td class="align-middle">@item.Prenume</td>
+                    <td class="align-middle">@item.Email</td>
+                    <td class="align-middle">@item.Telefon</td>
+                    <td class="text-center">
+                        <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-warning">Edit</a>
+                        <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-info">Detalii</a>
+                        <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-danger">Șterge</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

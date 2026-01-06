@@ -19,11 +19,42 @@ namespace GestiuneRestaurant.Pages.ProduseMeniu
             _context = context;
         }
 
-        public IList<ProdusMeniu> ProdusMeniu { get;set; } = default!;
+        public IList<ProdusMeniu> ProdusMeniu { get; set; } = default!;
+        public string NameSort { get; set; }
+        public string PriceSort { get; set; }
+        public string CurrentSort { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
-            ProdusMeniu = await _context.ProdusMeniu.ToListAsync();
+            CurrentSort = sortOrder;
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            PriceSort = sortOrder == "Pret" ? "price_desc" : "Pret";
+
+            IQueryable<ProdusMeniu> produseIQ = _context.ProdusMeniu
+                .Include(p => p.ProduseDestinate)
+                .ThenInclude(p => p.CategorieProdus);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                produseIQ = produseIQ.Where(s => s.NumePreparat.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    produseIQ = produseIQ.OrderByDescending(s => s.NumePreparat);
+                    break;
+                case "Pret":
+                    produseIQ = produseIQ.OrderBy(s => s.Pret);
+                    break;
+                case "price_desc":
+                    produseIQ = produseIQ.OrderByDescending(s => s.Pret);
+                    break;
+                default:
+                    produseIQ = produseIQ.OrderBy(s => s.NumePreparat);
+                    break;
+            }
+
+            ProdusMeniu = await produseIQ.AsNoTracking().ToListAsync();
         }
     }
 }

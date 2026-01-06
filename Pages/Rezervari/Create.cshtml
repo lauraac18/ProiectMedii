@@ -2,41 +2,62 @@
 @model GestiuneRestaurant.Pages.Rezervari.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Creare Rezervare";
 }
 
-<h1>Create</h1>
+<h1 class="text-primary display-4">Creare Rezervare Nouă</h1>
 
-<h4>Rezervare</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card shadow-sm mt-4 border-0">
+    <div class="card-body p-4">
         <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Rezervare.DataOra" class="control-label"></label>
-                <input asp-for="Rezervare.DataOra" class="form-control" />
-                <span asp-validation-for="Rezervare.DataOra" class="text-danger"></span>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Rezervare.ClientID" class="control-label fw-bold">Client</label>
+                    <select asp-for="Rezervare.ClientID" class="form-select shadow-sm" asp-items="ViewBag.ClientID">
+                        <option value="">-- Selectează Client --</option>
+                    </select>
+                    <span asp-validation-for="Rezervare.ClientID" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Rezervare.MasaID" class="control-label fw-bold">Masă</label>
+                    <select asp-for="Rezervare.MasaID" class="form-select shadow-sm" asp-items="ViewBag.MasaID">
+                        <option value="">-- Selectează Masa --</option>
+                    </select>
+                    <span asp-validation-for="Rezervare.MasaID" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Rezervare.MasaID" class="control-label"></label>
-                <select asp-for="Rezervare.MasaID" class ="form-control" asp-items="ViewBag.MasaID" ></select>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Rezervare.DataOra" class="control-label fw-bold"></label>
+                    <input asp-for="Rezervare.DataOra" class="form-control shadow-sm" />
+                    <span asp-validation-for="Rezervare.DataOra" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Rezervare.NumarPersoane" class="control-label fw-bold"></label>
+                    <input asp-for="Rezervare.NumarPersoane" class="form-control shadow-sm" placeholder="Ex: 4" />
+                    <span asp-validation-for="Rezervare.NumarPersoane" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Rezervare.ClientID" class="control-label"></label>
-                <select asp-for="Rezervare.ClientID" class ="form-control" asp-items="ViewBag.ClientID" ></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="d-flex align-items-center mt-4 pt-3 border-top">
+                <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm">
+                    <i class="bi bi-check-circle me-2"></i>Salvează Rezervarea
+                </button>
+                <a asp-page="Index" class="btn btn-outline-secondary btn-lg ms-3 shadow-sm">
+                    <i class="bi bi-arrow-left me-2"></i>Înapoi la Listă
+                </a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

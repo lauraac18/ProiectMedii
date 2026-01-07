@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GestiuneRestaurant.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore; 
 
 namespace GestiuneRestaurant.Data
 {
-    public class GestiuneRestaurantContext : DbContext
+    public class GestiuneRestaurantContext : IdentityDbContext
     {
         public GestiuneRestaurantContext (DbContextOptions<GestiuneRestaurantContext> options)
             : base(options)
